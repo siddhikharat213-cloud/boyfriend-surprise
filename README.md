@@ -1,1 +1,1810 @@
-# boyfriend-surprise
+# boyfriend-surprise<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Made With Love 💗</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,.7) 0 2px, transparent 3px),
+        #ffd6e5;
+    background-size:32px 32px,42px 42px;
+    color:#4a2735;
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   MAIN APP
+========================= */
+
+.app{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 15px;
+}
+
+.page{
+    width:min(440px,100%);
+    min-height:650px;
+    background:#fff8fb;
+    border:2px solid #f4b9cc;
+    border-radius:28px;
+    box-shadow:0 20px 50px rgba(102,44,66,.18);
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* =========================
+   DECORATION
+========================= */
+
+.tape{
+    position:absolute;
+    width:100px;
+    height:30px;
+    background:rgba(255,208,220,.8);
+    top:14px;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    z-index:5;
+}
+
+.made{
+    display:inline-block;
+    margin-top:24px;
+    padding:7px 12px;
+    border:1px solid #e89bb6;
+    border-radius:20px;
+    color:#c35b7b;
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:bold;
+    background:#fff0f5;
+}
+
+/* =========================
+   START SCREEN
+========================= */
+
+.start-screen{
+    text-align:center;
+    padding-top:25px;
+}
+
+.start-screen h1{
+    font-family:Georgia,serif;
+    font-size:42px;
+    color:#a83d63;
+    margin-top:25px;
+}
+
+.start-screen .subtitle{
+    margin:12px 0 25px;
+    color:#86596a;
+    line-height:1.6;
+}
+
+.heart-big{
+    font-size:85px;
+    animation:heartBeat 1.5s infinite;
+    margin:20px 0;
+}
+
+@keyframes heartBeat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+.form-group{
+    text-align:left;
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    color:#82475b;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    border:1.5px solid #edb4c7;
+    background:#fff;
+    border-radius:14px;
+    padding:12px;
+    outline:none;
+    color:#4a2735;
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#d96891;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn{
+    width:100%;
+    border:none;
+    border-radius:18px;
+    padding:14px 18px;
+    background:#c84e78;
+    color:white;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(200,78,120,.25);
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+    background:#b83f69;
+}
+
+.secondary-btn{
+    border:1.5px solid #df8faa;
+    border-radius:15px;
+    padding:10px 14px;
+    background:#fff5f8;
+    color:#a83d63;
+    font-weight:bold;
+}
+
+.secondary-btn:hover{
+    background:#ffe6ef;
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope-screen{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+.envelope{
+    width:280px;
+    height:190px;
+    background:#f4a7bd;
+    position:relative;
+    border-radius:10px;
+    margin:25px auto;
+    box-shadow:0 15px 35px rgba(100,40,60,.2);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.envelope:hover{
+    transform:translateY(-5px) rotate(-1deg);
+}
+
+.envelope:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:#e989a7;
+    clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%);
+    border-radius:10px;
+}
+
+.envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:105px;
+    background:#f7b5c9;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    z-index:3;
+    transform-origin:top;
+    transition:.7s;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-heart{
+    position:absolute;
+    z-index:5;
+    left:50%;
+    top:55%;
+    transform:translate(-50%,-50%);
+    font-size:50px;
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter-screen{
+    text-align:center;
+    padding-top:20px;
+}
+
+.letter-screen h2{
+    font-family:Georgia,serif;
+    font-size:34px;
+    color:#a83d63;
+    margin:20px 0;
+}
+
+.letter-paper{
+    background:#fff;
+    border:1px solid #f1c1d1;
+    border-radius:20px;
+    padding:22px;
+    text-align:left;
+    box-shadow:0 8px 20px rgba(100,40,60,.08);
+}
+
+.letter-photo{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:18px;
+    background:#ffe4ed;
+}
+
+.letter-text{
+    font-family:Georgia,serif;
+    line-height:1.8;
+    color:#5c3847;
+    white-space:pre-wrap;
+}
+
+.signature{
+    text-align:right;
+    margin-top:20px;
+    font-family:cursive;
+    color:#b2466d;
+    font-size:20px;
+}
+
+/* =========================
+   BALLOON SCREEN
+========================= */
+
+.balloon-screen{
+    text-align:center;
+    min-height:600px;
+    padding-top:15px;
+    position:relative;
+}
+
+.balloon-screen h2{
+    font-family:Georgia,serif;
+    color:#a83d63;
+    font-size:30px;
+    margin:20px 0 7px;
+}
+
+.balloon-screen p{
+    color:#8c6371;
+    font-size:14px;
+}
+
+.counter{
+    display:inline-block;
+    margin:15px 0;
+    padding:7px 14px;
+    background:#ffe5ee;
+    color:#ad476a;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.balloon-area{
+    width:100%;
+    height:430px;
+    position:relative;
+    margin-top:5px;
+}
+
+.balloon-wrap{
+    position:absolute;
+    width:75px;
+    height:155px;
+    cursor:pointer;
+    user-select:none;
+    transition:.2s;
+}
+
+.balloon-wrap:hover{
+    transform:translateY(-7px) rotate(2deg);
+}
+
+.balloon{
+    width:66px;
+    height:84px;
+    border-radius:50% 50% 47% 47%;
+    position:absolute;
+    top:0;
+    left:5px;
+    box-shadow:
+        inset -9px -10px 15px rgba(0,0,0,.08),
+        inset 8px 7px 12px rgba(255,255,255,.35),
+        0 7px 15px rgba(80,30,50,.12);
+}
+
+.balloon:before{
+    content:"";
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:inherit;
+    bottom:-5px;
+    left:28px;
+    transform:rotate(45deg);
+}
+
+.balloon-string{
+    position:absolute;
+    width:1.5px;
+    height:70px;
+    background:#9b6878;
+    left:38px;
+    top:84px;
+}
+
+.balloon-1{
+    left:7%;
+    top:15px;
+}
+
+.balloon-2{
+    left:28%;
+    top:115px;
+}
+
+.balloon-3{
+    right:28%;
+    top:35px;
+}
+
+.balloon-4{
+    right:7%;
+    top:150px;
+}
+
+.balloon-5{
+    left:47%;
+    top:245px;
+}
+
+.pink{
+    background:#f477a1;
+}
+
+.dark-pink{
+    background:#d94d7b;
+}
+
+.purple{
+    background:#a978cf;
+}
+
+.red{
+    background:#ed6574;
+}
+
+.yellow{
+    background:#f3c75d;
+}
+
+.balloon-wrap.popped{
+    pointer-events:none;
+    animation:balloonPop .4s ease forwards;
+}
+
+@keyframes balloonPop{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+    40%{
+        transform:scale(1.35);
+        opacity:1;
+    }
+    100%{
+        transform:scale(.05);
+        opacity:0;
+    }
+}
+
+/* =========================
+   POP STICKERS
+========================= */
+
+.pop-sticker{
+    position:fixed;
+    z-index:9999;
+    pointer-events:none;
+    font-weight:bold;
+    font-size:16px;
+    padding:8px 12px;
+    border-radius:13px;
+    background:white;
+    border:2px solid #e4779c;
+    box-shadow:0 7px 20px rgba(70,20,40,.15);
+    animation:stickerPop 1.25s ease forwards;
+    transform:translate(-50%,-50%) rotate(var(--rotate));
+}
+
+@keyframes stickerPop{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.2) rotate(var(--rotate));
+    }
+
+    20%{
+        opacity:1;
+        transform:translate(-50%,-75%) scale(1.15) rotate(var(--rotate));
+    }
+
+    55%{
+        opacity:1;
+        transform:translate(-50%,-125%) scale(1) rotate(var(--rotate));
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%,-180%) scale(.8) rotate(var(--rotate));
+    }
+}
+
+.spark{
+    position:fixed;
+    z-index:9998;
+    pointer-events:none;
+    font-size:18px;
+    animation:sparkFly 1s ease forwards;
+}
+
+@keyframes sparkFly{
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(.5);
+    }
+    100%{
+        opacity:0;
+        transform:translate(var(--x),var(--y)) scale(1.3);
+    }
+}
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+.final-screen{
+    text-align:center;
+    padding-top:15px;
+}
+
+.final-screen h2{
+    font-family:Georgia,serif;
+    color:#a83d63;
+    font-size:34px;
+    margin:15px 0 5px;
+}
+
+.final-screen .final-sub{
+    color:#896171;
+    margin-bottom:20px;
+}
+
+.bouquet{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:20px;
+    background:#ffe4ed;
+    margin-bottom:18px;
+}
+
+.stickers{
+    position:relative;
+    min-height:170px;
+    margin-bottom:15px;
+}
+
+.sticker{
+    position:absolute;
+    padding:8px 13px;
+    border-radius:14px;
+    background:#fff;
+    border:1.5px solid #e28ba7;
+    font-size:12px;
+    font-weight:bold;
+    color:#a13e61;
+    box-shadow:0 5px 12px rgba(100,40,60,.1);
+}
+
+.s1{
+    top:5px;
+    left:4%;
+    transform:rotate(-8deg);
+}
+
+.s2{
+    top:45px;
+    right:4%;
+    transform:rotate(7deg);
+}
+
+.s3{
+    top:95px;
+    left:8%;
+    transform:rotate(5deg);
+}
+
+.s4{
+    top:120px;
+    right:12%;
+    transform:rotate(-6deg);
+}
+
+.s5{
+    bottom:5px;
+    left:38%;
+    transform:rotate(3deg);
+}
+
+.s6{
+    bottom:20px;
+    right:1%;
+    transform:rotate(8deg);
+}
+
+.polaroid{
+    width:210px;
+    margin:5px auto 20px;
+    padding:10px 10px 15px;
+    background:white;
+    box-shadow:0 8px 20px rgba(80,30,50,.18);
+    transform:rotate(-2deg);
+}
+
+.polaroid-photo{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    background:#ffe4ed;
+}
+
+.polaroid-caption{
+    font-family:cursive;
+    font-size:17px;
+    color:#9c4163;
+    margin-top:8px;
+}
+
+.final-buttons{
+    display:flex;
+    gap:10px;
+    flex-direction:column;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%) translateY(30px);
+    background:#4b2635;
+    color:white;
+    padding:11px 17px;
+    border-radius:15px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:10000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:380px){
+
+    .page{
+        padding:18px;
+        min-height:620px;
+    }
+
+    .start-screen h1{
+        font-size:35px;
+    }
+
+    .balloon-area{
+        height:410px;
+    }
+
+    .balloon-wrap{
+        transform:scale(.9);
+    }
+
+    .balloon-wrap:hover{
+        transform:scale(.9) translateY(-5px);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="page">
+
+    <div class="tape"></div>
+
+    <!-- =========================
+         START PAGE
+    ========================== -->
+
+    <section id="startScreen" class="start-screen">
+
+        <div class="made">MADE WITH LOVE ♡</div>
+
+        <div class="heart-big">💗</div>
+
+        <h1>For My Person</h1>
+
+        <p class="subtitle">
+            A tiny little corner of the internet<br>
+            made especially for someone special.
+        </p>
+
+        <div class="form-group">
+            <label>His name</label>
+            <input
+                id="recipientName"
+                type="text"
+                placeholder="Enter his name..."
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Your name</label>
+            <input
+                id="senderName"
+                type="text"
+                placeholder="Enter your name..."
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Your message</label>
+            <textarea
+                id="loveMessage"
+                placeholder="Write something from your heart..."
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Add a photo
+                <span style="font-weight:normal;color:#aa7182;">
+                    (optional)
+                </span>
+            </label>
+
+            <input
+                id="photoInput"
+                type="file"
+                accept="image/*"
+            >
+
+        </div>
+
+        <button
+            id="startButton"
+            class="primary-btn"
+            type="button"
+        >
+            Create Something Cute 💗
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         ENVELOPE PAGE
+    ========================== -->
+
+    <section
+        id="envelopeScreen"
+        class="envelope-screen hidden"
+    >
+
+        <div class="made">JUST FOR YOU ♡</div>
+
+        <h2
+            id="envelopeTitle"
+            style="
+                font-family:Georgia,serif;
+                color:#a83d63;
+                margin-top:20px;
+            "
+        >
+            A little surprise...
+        </h2>
+
+        <p
+            style="
+                margin-top:8px;
+                color:#8c6371;
+            "
+        >
+            Tap the envelope 💌
+        </p>
+
+        <div
+            id="envelope"
+            class="envelope"
+        >
+
+            <div class="envelope-flap"></div>
+
+            <div class="envelope-heart">
+                💗
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LETTER PAGE
+    ========================== -->
+
+    <section
+        id="letterScreen"
+        class="letter-screen hidden"
+    >
+
+        <div class="made">A LETTER FOR YOU ♡</div>
+
+        <h2 id="letterHeading">
+            Dear Babe,
+        </h2>
+
+        <div class="letter-paper">
+
+            <img
+                id="letterPhoto"
+                class="letter-photo"
+                alt="Our photo"
+            >
+
+            <div
+                id="letterText"
+                class="letter-text"
+            ></div>
+
+            <div
+                id="letterSignature"
+                class="signature"
+            ></div>
+
+        </div>
+
+        <br>
+
+        <button
+            id="letterContinue"
+            class="primary-btn"
+            type="button"
+        >
+            There's more... 🎈
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         BALLOON PAGE
+    ========================== -->
+
+    <section
+        id="balloonScreen"
+        class="balloon-screen hidden"
+    >
+
+        <div class="made">ONE MORE THING ♡</div>
+
+        <h2>Pop every balloon 🎈</h2>
+
+        <p>
+            Each one holds something I love about you.
+        </p>
+
+        <div
+            id="balloonCounter"
+            class="counter"
+        >
+            5 left to pop
+        </div>
+
+        <div
+            id="balloonArea"
+            class="balloon-area"
+        >
+
+            <div
+                class="balloon-wrap balloon-1"
+                data-message="My favourite person 💗"
+            >
+                <div class="balloon pink"></div>
+                <div class="balloon-string"></div>
+            </div>
+
+            <div
+                class="balloon-wrap balloon-2"
+                data-message="My safe place 🫶"
+            >
+                <div class="balloon dark-pink"></div>
+                <div class="balloon-string"></div>
+            </div>
+
+            <div
+                class="balloon-wrap balloon-3"
+                data-message="My happiness ✨"
+            >
+                <div class="balloon purple"></div>
+                <div class="balloon-string"></div>
+            </div>
+
+            <div
+                class="balloon-wrap balloon-4"
+                data-message="My favourite smile 🥹"
+            >
+                <div class="balloon red"></div>
+                <div class="balloon-string"></div>
+            </div>
+
+            <div
+                class="balloon-wrap balloon-5"
+                data-message="My everything ❤️"
+            >
+                <div class="balloon yellow"></div>
+                <div class="balloon-string"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL PAGE
+    ========================== -->
+
+    <section
+        id="finalScreen"
+        class="final-screen hidden"
+    >
+
+        <div class="made">ALL FOR YOU ♡</div>
+
+        <h2>All popped! 🎉</h2>
+
+        <p class="final-sub">
+            And now you know just how much you mean to me.
+        </p>
+
+        <img
+            id="finalPhoto"
+            class="bouquet"
+            alt="Our favourite memory"
+        >
+
+        <div class="stickers">
+
+            <div class="sticker s1">
+                my favourite 💗
+            </div>
+
+            <div class="sticker s2">
+                my person 🫶
+            </div>
+
+            <div class="sticker s3">
+                my heart 💕
+            </div>
+
+            <div class="sticker s4">
+                my cutie 🎀
+            </div>
+
+            <div class="sticker s5">
+                love you ♡
+            </div>
+
+            <div class="sticker s6">
+                my everything ✨
+            </div>
+
+        </div>
+
+        <div class="polaroid">
+
+            <img
+                id="polaroidPhoto"
+                class="polaroid-photo"
+                alt="Memory"
+            >
+
+            <div class="polaroid-caption">
+                Sidipie & Babe ♡
+            </div>
+
+        </div>
+
+        <div class="final-buttons">
+
+            <button
+                id="shareButton"
+                class="primary-btn"
+                type="button"
+            >
+                Generate My Link 🔗
+            </button>
+
+            <button
+                id="restartButton"
+                class="secondary-btn"
+                type="button"
+            >
+                Make Again ♡
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+    aria-live="polite"
+></div>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+const state = {
+    recipient: "",
+    sender: "",
+    message: "",
+    photoData: "",
+    popped: 0
+};
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const envelopeScreen =
+    document.getElementById("envelopeScreen");
+
+const letterScreen =
+    document.getElementById("letterScreen");
+
+const balloonScreen =
+    document.getElementById("balloonScreen");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+const recipientInput =
+    document.getElementById("recipientName");
+
+const senderInput =
+    document.getElementById("senderName");
+
+const messageInput =
+    document.getElementById("loveMessage");
+
+const photoInput =
+    document.getElementById("photoInput");
+
+const envelope =
+    document.getElementById("envelope");
+
+const letterHeading =
+    document.getElementById("letterHeading");
+
+const letterText =
+    document.getElementById("letterText");
+
+const letterSignature =
+    document.getElementById("letterSignature");
+
+const letterPhoto =
+    document.getElementById("letterPhoto");
+
+const finalPhoto =
+    document.getElementById("finalPhoto");
+
+const polaroidPhoto =
+    document.getElementById("polaroidPhoto");
+
+const balloonCounter =
+    document.getElementById("balloonCounter");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+
+function showOnly(screen){
+
+    const screens = [
+        startScreen,
+        envelopeScreen,
+        letterScreen,
+        balloonScreen,
+        finalScreen
+    ];
+
+    screens.forEach(function(item){
+        item.classList.add("hidden");
+    });
+
+    screen.classList.remove("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    clearTimeout(toastTimer);
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    toastTimer = setTimeout(function(){
+        toast.classList.remove("show");
+    },2200);
+}
+
+
+/* =========================================================
+   PHOTO HANDLING
+========================================================= */
+
+photoInput.addEventListener("change",function(){
+
+    const file = this.files[0];
+
+    if(!file){
+        state.photoData = "";
+        return;
+    }
+
+    if(!file.type.startsWith("image/")){
+        showToast("Please select an image.");
+        this.value = "";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+        state.photoData = event.target.result;
+
+        showToast("Photo added 💗");
+    };
+
+    reader.onerror = function(){
+
+        showToast("Couldn't load that photo.");
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =========================================================
+   START BUTTON
+========================================================= */
+
+document
+.getElementById("startButton")
+.addEventListener("click",function(){
+
+    state.recipient =
+        recipientInput.value.trim() || "Babe";
+
+    state.sender =
+        senderInput.value.trim() || "Your girl";
+
+    state.message =
+        messageInput.value.trim() ||
+        "I just wanted to make this little corner of the internet for you. Thank you for being you and for making my life a little more beautiful every day. I love you so much. ❤️";
+
+    state.popped = 0;
+
+    letterHeading.textContent =
+        "Dear " + state.recipient + ",";
+
+    letterText.textContent =
+        state.message;
+
+    letterSignature.textContent =
+        "Love, " + state.sender + " ♡";
+
+    const defaultPhoto =
+        createDefaultPhoto();
+
+    const selectedPhoto =
+        state.photoData || defaultPhoto;
+
+    letterPhoto.src = selectedPhoto;
+    finalPhoto.src = selectedPhoto;
+    polaroidPhoto.src = selectedPhoto;
+
+    document.getElementById("envelopeTitle")
+        .textContent =
+        "A little surprise for " +
+        state.recipient +
+        "...";
+
+    showOnly(envelopeScreen);
+
+});
+
+
+/* =========================================================
+   DEFAULT ROMANTIC IMAGE
+========================================================= */
+
+function createDefaultPhoto(){
+
+    const svg = `
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="800"
+        height="600"
+        viewBox="0 0 800 600"
+    >
+
+        <defs>
+
+            <linearGradient
+                id="bg"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="1"
+            >
+                <stop
+                    offset="0%"
+                    stop-color="#ffd8e6"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#f6a9c4"
+                />
+            </linearGradient>
+
+        </defs>
+
+        <rect
+            width="800"
+            height="600"
+            fill="url(#bg)"
+        />
+
+        <circle
+            cx="130"
+            cy="130"
+            r="55"
+            fill="#fff"
+            opacity=".55"
+        />
+
+        <circle
+            cx="680"
+            cy="170"
+            r="80"
+            fill="#fff"
+            opacity=".35"
+        />
+
+        <text
+            x="400"
+            y="270"
+            text-anchor="middle"
+            font-family="Georgia"
+            font-size="85"
+            fill="#a83d63"
+        >
+            ♡
+        </text>
+
+        <text
+            x="400"
+            y="365"
+            text-anchor="middle"
+            font-family="Georgia"
+            font-size="34"
+            fill="#7b4358"
+        >
+            our little memory
+        </text>
+
+        <text
+            x="400"
+            y="420"
+            text-anchor="middle"
+            font-family="Arial"
+            font-size="20"
+            fill="#96586f"
+        >
+            made with love
+        </text>
+
+    </svg>
+    `;
+
+    return "data:image/svg+xml;charset=UTF-8," +
+        encodeURIComponent(svg);
+}
+
+
+/* =========================================================
+   ENVELOPE OPEN
+========================================================= */
+
+envelope.addEventListener("click",function(){
+
+    if(envelope.classList.contains("open")){
+        return;
+    }
+
+    envelope.classList.add("open");
+
+    setTimeout(function(){
+
+        showOnly(letterScreen);
+
+    },900);
+
+});
+
+
+/* =========================================================
+   LETTER CONTINUE
+========================================================= */
+
+document
+.getElementById("letterContinue")
+.addEventListener("click",function(){
+
+    resetBalloons();
+
+    showOnly(balloonScreen);
+
+});
+
+
+/* =========================================================
+   BALLOON SETUP
+========================================================= */
+
+const balloons =
+    Array.from(
+        document.querySelectorAll(".balloon-wrap")
+    );
+
+
+function resetBalloons(){
+
+    state.popped = 0;
+
+    balloons.forEach(function(balloon){
+
+        balloon.classList.remove("popped");
+        balloon.style.pointerEvents = "auto";
+
+    });
+
+    updateBalloonCounter();
+
+}
+
+
+function updateBalloonCounter(){
+
+    const remaining =
+        balloons.length - state.popped;
+
+    if(remaining > 0){
+
+        balloonCounter.textContent =
+            remaining + " left to pop";
+
+    }else{
+
+        balloonCounter.textContent =
+            "All popped! 🎉";
+
+    }
+
+}
+
+
+/* =========================================================
+   BALLOON CLICK
+========================================================= */
+
+balloons.forEach(function(balloon){
+
+    balloon.addEventListener("click",function(){
+
+        if(balloon.classList.contains("popped")){
+            return;
+        }
+
+        balloon.classList.add("popped");
+
+        balloon.style.pointerEvents = "none";
+
+        state.popped++;
+
+        updateBalloonCounter();
+
+        createPopEffect(balloon);
+
+        const message =
+            balloon.dataset.message || "Love you! 💗";
+
+        setTimeout(function(){
+
+            showToast(message);
+
+        },180);
+
+        if(state.popped === balloons.length){
+
+            setTimeout(function(){
+
+                showOnly(finalScreen);
+
+                createFinalCelebration();
+
+            },1250);
+
+        }
+
+    });
+
+});
+
+
+/* =========================================================
+   POP EFFECT
+========================================================= */
+
+const popMessages = [
+    "LOVE YOU 💗",
+    "CUTIE 🎀",
+    "MY PERSON 🫶",
+    "FOREVER ♡",
+    "MY HEART 💕",
+    "MY FAVOURITE ✨",
+    "BABBYYYY 💗",
+    "MWAH 😚"
+];
+
+
+function createPopEffect(balloon){
+
+    const rect =
+        balloon.getBoundingClientRect();
+
+    const centerX =
+        rect.left + rect.width / 2;
+
+    const centerY =
+        rect.top + 42;
+
+    /* Main sticker */
+
+    const sticker =
+        document.createElement("div");
+
+    sticker.className = "pop-sticker";
+
+    sticker.textContent =
+        popMessages[
+            Math.floor(
+                Math.random() *
+                popMessages.length
+            )
+        ];
+
+    sticker.style.left =
+        centerX + "px";
+
+    sticker.style.top =
+        centerY + "px";
+
+    sticker.style.setProperty(
+        "--rotate",
+        (Math.random() * 18 - 9) + "deg"
+    );
+
+    document.body.appendChild(sticker);
+
+    setTimeout(function(){
+        sticker.remove();
+    },1400);
+
+
+    /* Smaller sparkles */
+
+    const sparkSymbols = [
+        "✨",
+        "💗",
+        "💕",
+        "⭐",
+        "♡",
+        "🎀"
+    ];
+
+    for(let i = 0; i < 8; i++){
+
+        const spark =
+            document.createElement("div");
+
+        spark.className = "spark";
+
+        spark.textContent =
+            sparkSymbols[
+                Math.floor(
+                    Math.random() *
+                    sparkSymbols.length
+                )
+            ];
+
+        spark.style.left =
+            centerX + "px";
+
+        spark.style.top =
+            centerY + "px";
+
+        const x =
+            (Math.random() * 160 - 80) +
+            "px";
+
+        const y =
+            (Math.random() * 150 - 100) +
+            "px";
+
+        spark.style.setProperty(
+            "--x",
+            x
+        );
+
+        spark.style.setProperty(
+            "--y",
+            y
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(function(){
+            spark.remove();
+        },1100);
+
+    }
+
+}
+
+
+/* =========================================================
+   FINAL CELEBRATION
+========================================================= */
+
+function createFinalCelebration(){
+
+    const symbols = [
+        "💗",
+        "💕",
+        "✨",
+        "🎀",
+        "♡",
+        "⭐"
+    ];
+
+    for(let i = 0; i < 18; i++){
+
+        const spark =
+            document.createElement("div");
+
+        spark.className = "spark";
+
+        spark.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        spark.style.left =
+            (20 + Math.random() * 60) + "%";
+
+        spark.style.top =
+            (35 + Math.random() * 30) + "%";
+
+        spark.style.setProperty(
+            "--x",
+            (Math.random() * 300 - 150) + "px"
+        );
+
+        spark.style.setProperty(
+            "--y",
+            (Math.random() * -250 - 50) + "px"
+        );
+
+        document.body.appendChild(spark);
+
+        setTimeout(function(){
+            spark.remove();
+        },1200);
+
+    }
+
+}
+
+
+/* =========================================================
+   SHARE LINK
+========================================================= */
+
+document
+.getElementById("shareButton")
+.addEventListener("click",async function(){
+
+    /*
+       IMPORTANT:
+       The text information can be stored in the URL.
+
+       A local uploaded photo cannot reliably be stored
+       inside a normal share URL because it may be very large.
+    */
+
+    const params =
+        new URLSearchParams();
+
+    params.set(
+        "to",
+        state.recipient
+    );
+
+    params.set(
+        "from",
+        state.sender
+    );
+
+    params.set(
+        "message",
+        state.message
+    );
+
+    const shareURL =
+        window.location.origin +
+        window.location.pathname +
+        "?" +
+        params.toString();
+
+    try{
+
+        await navigator.clipboard.writeText(
+            shareURL
+        );
+
+        showToast(
+            "Link copied! 🔗💗"
+        );
+
+    }catch(error){
+
+        /*
+           Clipboard may be blocked in some
+           browsers/files opened locally.
+        */
+
+        window.prompt(
+            "Copy your link:",
+            shareURL
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   LOAD DATA FROM SHARE URL
+========================================================= */
+
+function loadFromURL(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const to =
+        params.get("to");
+
+    const from =
+        params.get("from");
+
+    const message =
+        params.get("message");
+
+    if(!to && !from && !message){
+        return;
+    }
+
+    if(to){
+
+        recipientInput.value =
+            to;
+
+    }
+
+    if(from){
+
+        senderInput.value =
+            from;
+
+    }
+
+    if(message){
+
+        messageInput.value =
+            message;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+document
+.getElementById("restartButton")
+.addEventListener("click",function(){
+
+    state.recipient = "";
+    state.sender = "";
+    state.message = "";
+    state.photoData = "";
+    state.popped = 0;
+
+    recipientInput.value = "";
+    senderInput.value = "";
+    messageInput.value = "";
+    photoInput.value = "";
+
+    envelope.classList.remove("open");
+
+    resetBalloons();
+
+    showOnly(startScreen);
+
+});
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+loadFromURL();
+
+resetBalloons();
+
+</script>
+
+</body>
+</html>
